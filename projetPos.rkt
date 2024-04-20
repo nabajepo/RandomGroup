@@ -27,7 +27,7 @@
   ))
 (MakeRightChoose)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define (save 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (delet element list res);this function delet element in a list
   (cond
@@ -53,9 +53,9 @@
 (define (makePlaces listPers listPlaces result)
   (cond
     ((null? listPers)
-     (display "Those are your results:")
+     (display "Those are places specfics for each persons given:")
      (newline)
-     (display result))
+     (display (reverse result '())))
     (else
      (define placeN (getElementAt (random 0 (length listPlaces 0)) listPlaces 0));here we stock the number of place selected
      (makePlaces (delet (car listPers) listPers '()) (delet placeN listPlaces '()) (cons (cons (car listPers) placeN) result))
@@ -85,7 +85,7 @@
  
   )
 
-(define (chooseTeam);this function
+(define (chooseTeam);this function is for make team
   (display "NOT YET CODED")
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
