@@ -3,8 +3,6 @@
 (define programExec "none")
 (define listP "none")
 (define places "none")
-(define team "none")
- (define splitN "none")
 ;we start the program
 (define categories '((Select 1 for Choose_number_Of_Places_InExamen_Or_Stade)  (Select 2 for ChooseTeam_Of_Npersons) (Select 3 for Leave_the_program)));here it what the program can do
 (display "Please choose among our program's function")
@@ -51,7 +49,6 @@
   (if
    (null? list)sum
    (length (cdr list) (+ sum 1))))
-;ssve
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (makePlaces listPers listPlaces result)
   (cond
@@ -64,26 +61,7 @@
      (makePlaces (delet (car listPers) listPers '()) (delet placeN listPlaces '()) (cons (cons (car listPers) placeN) result))
    )
     ))
-(define (makeTeam numberT listP T start)
-  (cond
-    ((or(equal? start numberT)(null? listP))
-     (cond
-      ((null? listP)
-       (newline)
-       (display T)
-       )
-      (else
-       (newline)
-       (display T)
-       (makeTeam numberT listP '() 0))))
-                     
-    
-    (else
-     (define teamM (getElementAt (random 0 (length listP 0)) listP 0))
-     (makeTeam numberT  (delet teamM listP '()) (cons teamM T) (+ start 1)))))
-    
- 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (define (choosePlaces);this function give ranom choose
   (newline)
   (display "Please follow all instructions below given with the folder")
@@ -108,29 +86,8 @@
   )
 
 (define (chooseTeam);this function is for make team
-  (newline)
-  (display "Please follow all instructions below given with the folder")
-  (newline)
-  (display "Please,insert name of persons separated by comma each to make a team:")
-  (newline)
-  (define teamN (read-line))
-  (set! team (string-split teamN ","))
-  (display "How many persons in a team :")
-  (newline)
-  (define splitN (string->number(read-line)))
-  (cond
-    ((or (not (number? splitN)) (> splitN (length team 0)))
-     (display "Error we can not create team for ")
-     (display splitN)
-     (display " with ")
-     (display (length team 0))
-     (display " persons,please try again")
-     (chooseTeam))
-    (else
-     (display "Those are your team :")
-     (makeTeam splitN team '() 0)
-    )
-     ))
+  (display "NOT YET CODED")
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (directionProgram choose);this function sent toward the choose made
   (cond
@@ -141,10 +98,7 @@
       (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
     ((equal? 2 choose)
-      (display "-------------------------------------------------TEAMS-----------------------------------------------------")
      (chooseTeam)
-      (newline)
-      (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
     (else
      (display "Good-bye")
