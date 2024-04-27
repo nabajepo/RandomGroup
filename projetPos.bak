@@ -5,9 +5,6 @@
 (define places "none")
 (define team "none")
  (define splitN "none")
-(define  response "none")
-(define top "-------------------------")
-(define bottom "-------------------------")
 ;we start the program
 (define categories '((Select 1 for Choose_number_Of_Places_InExamen_Or_Stade)  (Select 2 for ChooseTeam_Of_Npersons) (Select 3 for Leave_the_program)));here it what the program can do
 (display "Please choose among our program's function")
@@ -84,20 +81,6 @@
     (else
      (define teamM (getElementAt (random 0 (length listP 0)) listP 0))
      (makeTeam numberT  (delet teamM listP '()) (cons teamM T) (+ start 1)))))
-(define(save)
-  (display "Insert the location")
-  (display "you can see the example in README.txt")
-  (newline)
-  (define location (read-line))
-  
-  )
-(define (insertIn loc )
-  (cond?
-   ((null? response)
-  (call-with-output-file loc
-    #:exists 'replace
-    (lambda (output-port)
-      (display 
     
  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -155,15 +138,11 @@
       (display "-------------------------------------------------PLACES----------------------------------------------------")
       (choosePlaces)
       (newline)
-      (save)
-      (newline)
       (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
     ((equal? 2 choose)
       (display "-------------------------------------------------TEAMS-----------------------------------------------------")
      (chooseTeam)
-      (newline)
-      (save)
       (newline)
       (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
