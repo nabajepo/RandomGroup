@@ -1,4 +1,4 @@
-#lang racket
+#lang scheme
 ;This program gives random numbers for people based on the choice of what was asked.
 (define programExec "none")
 (define listP "none")

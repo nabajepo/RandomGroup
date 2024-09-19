@@ -5,9 +5,8 @@
 (define places "none")
 (define team "none")
  (define splitN "none")
-(define  response "none")
-(define top "-------------------------")
-(define bottom "-------------------------")
+(define  response '())
+(define border "-------------------------")
 ;we start the program
 (define categories '((Select 1 for Choose_number_Of_Places_InExamen_Or_Stade)  (Select 2 for ChooseTeam_Of_Npersons) (Select 3 for Leave_the_program)));here it what the program can do
 (display "Please choose among our program's function")
@@ -32,6 +31,17 @@
   ))
 (MakeRightChoose)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define (quesSave)
+  (display "Would you like to save the result? Yes or No")
+  (newline)
+  (define rep (string-upcase(read-line)))
+  (cond
+    ((equal? rep "YES")
+     (save)
+      (display "SAVE-SUCCESSFULLY")
+     )
+    (else
+     (display "THANK-YOU"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define (delet element list res);this function delet element in a list
@@ -61,7 +71,8 @@
     ((null? listPers)
      (display "Those are places specfics for each persons given:")
      (newline)
-     (display (reverse result '())))
+     (set! response (reverse result '()))
+     (display response))
     (else
      (define placeN (getElementAt (random 0 (length listPlaces 0)) listPlaces 0));here we stock the number of place selected
      (makePlaces (delet (car listPers) listPers '()) (delet placeN listPlaces '()) (cons (cons (car listPers) placeN) result))
@@ -74,30 +85,57 @@
       ((null? listP)
        (newline)
        (display T)
+       (set! response(cons T response))
+       (newline)
+       (display "We got ")
+       (display (length response 0))
+       (display " teams")
        )
       (else
        (newline)
        (display T)
+       (set! response(cons T response))
        (makeTeam numberT listP '() 0))))
                      
     
     (else
      (define teamM (getElementAt (random 0 (length listP 0)) listP 0))
      (makeTeam numberT  (delet teamM listP '()) (cons teamM T) (+ start 1)))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define(save)
   (display "Insert the location")
-  (display "you can see the example in README.txt")
+  (newline)
+  (display "you can see an example in README.txt")
   (newline)
   (define location (read-line))
-  
-  )
-(define (insertIn loc )
-  (cond?
-   ((null? response)
+  (insertIn location response 0)
+ )
+(define (insertIn loc list start)
+  (cond
+   ((null? list)
   (call-with-output-file loc
-    #:exists 'replace
+    #:exists 'append
     (lambda (output-port)
-      (display 
+      (display border output-port))))
+   ((equal? start 0)
+    (call-with-output-file loc
+    #:exists 'append
+    (lambda (output-port)
+      (display border output-port)
+      (newline output-port)
+      ))
+    (insertIn loc list 1))
+   (else
+    (call-with-output-file loc
+    #:exists 'append
+    (lambda (output-port)
+      (display (car list) output-port)
+      (newline output-port)
+      ))
+    (insertIn loc (cdr list) 1)
+    
+    )
+   ))
     
  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -144,7 +182,7 @@
      (display " persons,please try again")
      (chooseTeam))
     (else
-     (display "Those are your team :")
+     (display "Those are yours teams :")
      (makeTeam splitN team '() 0)
     )
      ))
@@ -155,7 +193,7 @@
       (display "-------------------------------------------------PLACES----------------------------------------------------")
       (choosePlaces)
       (newline)
-      (save)
+      (quesSave)
       (newline)
       (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
@@ -163,16 +201,17 @@
       (display "-------------------------------------------------TEAMS-----------------------------------------------------")
      (chooseTeam)
       (newline)
-      (save)
+      (quesSave)
       (newline)
       (display "--------------------------------------------------DONE-----------------------------------------------------")
      )
     (else
-     (display "Good-bye")
+     (display "GOOD-BYE")
      )
     )
   )
 (directionProgram programExec)
+                                                                                                                                           ;nabajepo
 
   
   
