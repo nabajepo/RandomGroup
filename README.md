@@ -37,12 +37,12 @@ Creates teams randomly from a list of people.
 
 Example:
 
-Input: <br>
+**Input:** <br>
 Names: A,B,C,D,E,F <br>
 Team size: 2 <br>
 
 
-Output (example):
+**Output (example):** <br>
 Team1: A B <br>
 Team2: C D <br>
 Team3: E F <br>
